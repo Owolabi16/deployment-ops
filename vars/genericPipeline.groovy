@@ -1,14 +1,13 @@
 def call(Map config = [:]) {
     pipeline {
         environment {
-            ENV = config.env ?: "staging"
-            PROJECT = config.project ?: "occasio-hosting"
+            ENV = "staging"
+            PROJECT = "occasio-hosting"
             NAME = "${env.JOB_NAME.split('/')[0].replaceAll(/_\w+$/, '')}"
             APP_NAME = "drupal-${NAME.replaceFirst(/_tg$/, '')}"
             NAMESPACE = "${NAME}-tg"
-            AWS_ID = config.awsId ?: "000000000000"
             ECR_REGISTRY = "${AWS_ID}.dkr.ecr.region-code.amazonaws.com"
-            REGION = config.region ?: "region-code"
+            REGION = "region-code"
 
             IMAGE = "${ECR_REGISTRY}/${APP_NAME}"
             IMAGE_SIMPLE_TAG = "${IMAGE}:${env.BRANCH_NAME.replace("/","-")}"
