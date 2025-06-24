@@ -17,7 +17,6 @@ def call(Map config = [:]) {
 
         agent {
             kubernetes {
-                label "web-${NAME}"
                 yaml """
 apiVersion: v1
 kind: Pod
